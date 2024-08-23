@@ -9,6 +9,9 @@ dependencies = [
     "fire>=0.6.0",
 ]
 
+[project.scripts]
+hf = "hf.cli:main"
+
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
