@@ -1,6 +1,6 @@
 # hf
 
-A CLI tool to list discussions on a Hugging Face repo.
+A CLI for managing huggingface repository collaborative functions.
 
 Today it only supports listing and closing discussions, maybe one day it will
 do more.
