@@ -1,5 +1,11 @@
-import fire
+import warnings
 from huggingface_hub import HfApi
+
+# Suppress the DeprecationWarning for 'pipes'  # noqa: E402
+warnings.filterwarnings("ignore", category=DeprecationWarning, module="fire.core")
+
+import fire  # noqa: E402
+
 
 class Discussions:
     def list(self, repo: str, show_all: bool = False):
