@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch
-from hf.cli import Discussions
+from hf.cli import Discussions, Tags
 
 class TestDiscussions(unittest.TestCase):
 
@@ -20,6 +20,18 @@ class TestDiscussions(unittest.TestCase):
         discussions = Discussions()
         discussions.close('org/repo', 1)
         mock_api.change_discussion_status.assert_called_once_with(repo_id='org/repo', discussion_num=1, new_status='closed')
+
+class TestTags(unittest.TestCase):
+
+    @patch('hf.cli.HfApi')
+    def test_list_tags(self, MockHfApi):
+        mock_api = MockHfApi.return_value
+        mock_api.list_repo_tags.return_value = [
+            type('Tag', (object,), {'tag': 'v1.0', 'sha': 'abc123', 'message': 'Version 1.0'})
+        ]
+        tags = Tags()
+        tags.list('org/repo')
+        mock_api.list_repo_tags.assert_called_once_with(repo_id='org/repo')
 
 if __name__ == '__main__':
     unittest.main()

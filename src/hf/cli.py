@@ -24,7 +24,7 @@ class Tags:
         api = HfApi()
         tags = api.list_repo_tags(repo_id=repo)
         for tag in tags:
-            print(f"Tag: {tag.name}, Commit: {tag.commit}")
+            print(f"Tag: {tag.tag}, Commit: {tag.sha}")
 
     def create(self, repo: str, tag_name: str, commit: str):
         api = HfApi()
