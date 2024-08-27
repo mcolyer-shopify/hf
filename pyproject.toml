@@ -8,10 +8,14 @@ dependencies = [
     "huggingface-hub>=0.24.6",
     "fire>=0.6.0",
     "pytest>=8.3.2",
+    "ruff>=0.0.289",
 ]
 
 [project.scripts]
 hf = "hf.cli:main"
+
+[tool.ruff]
+line-length = 88
 
 [build-system]
 requires = ["hatchling"]
