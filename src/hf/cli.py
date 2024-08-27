@@ -22,9 +22,10 @@ class Discussions:
 class Tags:
     def list(self, repo: str):
         api = HfApi()
-        tags = api.list_repo_tags(repo_id=repo)
-        for tag in tags:
-            print(f"Tag: {tag.tag}, Commit: {tag.sha}")
+        refs = api.list_repo_refs(repo_id=repo)
+        for ref in refs.tags:
+            if ref.type == "tag":
+                print(f"Tag: {ref.ref}, Commit: {ref.commit}")
 
     def create(self, repo: str, tag_name: str, commit: str):
         api = HfApi()

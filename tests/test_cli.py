@@ -26,12 +26,16 @@ class TestTags(unittest.TestCase):
     @patch('hf.cli.HfApi')
     def test_list_tags(self, MockHfApi):
         mock_api = MockHfApi.return_value
-        mock_api.list_repo_tags.return_value = [
-            type('Tag', (object,), {'tag': 'v1.0', 'sha': 'abc123', 'message': 'Version 1.0'})
-        ]
+        mock_api.list_repo_refs.return_value = type(
+            'GitRefs', 
+            (object,), 
+            {'tags': [
+                type('Tag', (object,), {'ref': 'v1.0', 'commit': 'abc123', 'type': 'tag'})
+            ]}
+        )
         tags = Tags()
         tags.list('org/repo')
-        mock_api.list_repo_tags.assert_called_once_with(repo_id='org/repo')
+        mock_api.list_repo_refs.assert_called_once_with(repo_id='org/repo')
 
 if __name__ == '__main__':
     unittest.main()
